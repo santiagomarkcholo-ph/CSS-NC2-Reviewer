@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CSS NC2 Reviewer</title>
+<style>
+:root{--bg:#fff8d6;--card:#fffdf0;--ink:#3b2f00;--acc:#f5c400;--acc2:#b88a00;--ok:#1e7a34;--okbg:#dff5e2;--no:#b3261e;--nobg:#fde2df;--bd:#ecd66a;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1d1800;--card:#2a2300;--ink:#fff3b0;--acc:#ffd426;--acc2:#e6b800;--ok:#7fe39a;--okbg:#17361f;--no:#ff9b93;--nobg:#401a17;--bd:#5a4a00;color-scheme:dark}}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.45}
+.wrap{max-width:640px;margin:0 auto;padding:14px}
+h1{margin:6px 0 10px;font-size:22px}
+.tabs{display:flex;gap:8px;margin-bottom:12px}
+.tabs button{flex:1;padding:10px 2px;border:2px solid var(--acc);background:var(--card);color:var(--ink);border-radius:12px;font-weight:700;font-size:13px}
+.tabs button.on{background:var(--acc);color:#3b2f00}
+.card{background:var(--card);border:2px solid var(--bd);border-radius:16px;padding:14px;margin-bottom:12px}
+.bar{height:8px;background:var(--bd);border-radius:6px;overflow:hidden;margin:6px 0 12px}
+.bar i{display:block;height:100%;background:var(--acc);width:0}
+.meta{display:flex;justify-content:space-between;font-size:13px;opacity:.85}
+.q{font-size:18px;font-weight:700;margin:8px 0 12px}
+.opt{display:block;width:100%;text-align:left;padding:12px;margin:8px 0;border:2px solid var(--bd);background:var(--bg);color:var(--ink);border-radius:12px;font-size:16px}
+.opt:active{background:var(--acc)}
+.opt.ok{border-color:var(--ok);background:var(--okbg)}
+.opt.no{border-color:var(--no);background:var(--nobg)}
+.fb{padding:12px;border-radius:12px;margin-top:10px;font-size:15px}
+.fb.ok{background:var(--okbg)}.fb.no{background:var(--nobg)}
+.btn{background:var(--acc);color:#3b2f00;border:0;border-radius:12px;padding:12px 18px;font-weight:800;font-size:16px;margin-top:10px}
+.btn.alt{background:transparent;border:2px solid var(--acc);color:var(--ink)}
+.row{display:flex;gap:8px;flex-wrap:wrap}
+.hide{display:none}
+details{background:var(--card);border:2px solid var(--bd);border-radius:14px;padding:10px 12px;margin-bottom:8px}
+summary{font-weight:800;cursor:pointer}
+details p{margin:6px 0 0}
+ol,ul{padding-left:20px;margin:6px 0}
+.tag{background:var(--acc);color:#3b2f00;border-radius:8px;padding:1px 7px;font-size:12px;font-weight:800}
+.miss{font-size:14px;border-top:1px dashed var(--bd);padding:8px 0}
+</style></head><body><div class="wrap">
+<h1>🟡 CSS NC2 Reviewer</h1>
+<div class="tabs"><button id="t1" class="on" onclick="tab(1)">Quiz</button><button id="t2" onclick="tab(2)">System Unit</button><button id="t3" onclick="tab(3)">OSI</button><button id="t4" onclick="tab(4)">Topology</button></div>
+
+<div id="quiz">
+ <div id="start" class="card">
+  <p><b>60 questions</b> from your mock exam. Pick an answer and you will see why it is right or wrong.</p>
+  <div class="row"><button class="btn" onclick="go(false)">Start in order</button><button class="btn alt" onclick="go(true)">Shuffle</button></div>
+ </div>
+ <div id="play" class="hide">
+  <div class="meta"><span id="pos"></span><span id="sc"></span></div>
+  <div class="bar"><i id="pb"></i></div>
+  <div class="card"><div class="q" id="qt"></div><div id="ops"></div><div id="fb"></div><button class="btn hide" id="nx" onclick="next()">Next ➜</button></div>
+ </div>
+ <div id="end" class="hide card"></div>
+</div>
+
+<div id="parts" class="hide">
+ <div class="card"><b>Safety first</b><ul><li>Unplug the PSU, press the power button to drain charge.</li><li>Wear an ESD wrist strap or touch bare metal case.</li><li>Hold boards by the edges. Keep screws sorted per part.</li></ul></div>
+ <div id="plist"></div>
+ <details open><summary>🔧 Disassembly order</summary><ol><li>Unplug all cables and peripherals</li><li>Remove side panel</li><li>Disconnect power and data cables (PSU, SATA)</li><li>Remove expansion cards (GPU, NIC)</li><li>Remove RAM</li><li>Remove drives (HDD/SSD, optical)</li><li>Remove CPU fan/heatsink, then CPU</li><li>Remove motherboard</li><li>Remove PSU</li></ol><p>Mnemonic: <b>C</b>ables, <b>C</b>ards, <b>R</b>AM, <b>D</b>rives, <b>C</b>PU, <b>M</b>obo, <b>P</b>SU = “Can Cats Run, Dodge Cars, Maybe Panic?”</p></details>
+ <details><summary>🔩 Assembly order</summary><ol><li>Install PSU in the case</li><li>Install standoffs, then motherboard</li><li>Install CPU (match the gold triangle), thermal paste, heatsink and fan</li><li>Install RAM (click both clips)</li><li>Install drives (HDD/SSD, optical)</li><li>Install expansion cards</li><li>Connect 24-pin, 4/8-pin CPU power, SATA, front panel and USB headers</li><li>Cable manage, close case, test POST</li></ol><p>Assembly is basically the reverse of disassembly.</p></details>
+</div>
+</div>
+
+<script>
+const Q=`What is the common color for USB 3.0 standard A connectors?|Black|Blue|Red|White|1|USB 3.0 = “3 = Blue”. USB 2.0 is black or white.
+What type of memory is used in an SSD?|DRAM|Flash Memory|ROM|SRAM|1|SSDs have no moving parts. They store data in NAND flash memory.
+Where is the BIOS originally stored?|HDD|RAM|ROM|SSD|2|BIOS is firmware on a ROM chip, so it survives power-off. RAM loses data, and HDD/SSD are for storage.
+___ is a complete copy of everything stored on a physical optical disc.|Backup File|ISO image|Memory map|Stored file|1|An ISO image is a 1:1 copy of a disc. A backup file is any copy, not specifically of a disc.
+Minimum HDD capacity for Windows 10?|16 GB (32-bit) or 20 GB (64-bit)|20 GB (32-bit) or 30 GB (64-bit)|20 GB (32-bit) or 40 GB (64-bit)|30 GB (32-bit) or 40 GB (64-bit)|0|Memorize “16-20”. The other choices are too high.
+Where do Windows device drivers store?|Computer|Drivers and Settings|Hardware|Registry|3|Driver settings are kept in the Windows Registry (best fit among the choices).
+Volt rating of the RED wire in a power supply?|-5V|+5V|-12V|+12V|1|Red 5, Yellow 12, Orange 3.3, Black ground.
+___ is a network cable with T568-A on one end and T568-B on the other.|Cross-over|Extreme|Roll-over|Straight-Thru|0|Different ends = crossed. Same ends = straight-thru. Roll-over is the console cable.
+In Windows 10, a LAN icon with a red cross signifies ___|Emergency that needs attention|LAN update|Problem with the LAN driver|Virus in the LAN|2|Red X = the network adapter is not working or has no driver (best fit).
+Which hardware component can connect over a computer network?|Network driver|Network Hardware Card|Network Interface Card|Network Module card|2|NIC is the real term. A driver is software.
+A Yost cable, Cisco cable and Console cable are also known as ___|Cross-over|Extreme|Straight Thru|Roll Over|3|They are all rollover cables, used to configure routers and switches.
+In Server 2008, a LAN icon with a yellow indicator signifies ___|Driver problem|No connectivity|Update|Virus|1|Yellow warning = limited or no connectivity.
+The LED in a NIC has ___ lights.|1|2|3|4|1|Link light + activity light.
+Port ___ is a NAT application that redirects a request from one address/port to another.|Evaluation|Forwarding|Request|Standard|1|Port forwarding is based on NAT.
+Wireless alternative to wired connection using radio frequencies?|Wireless fidelity|Wireless finder|Wireless firmware|Wireless fix|0|Wi-Fi = Wireless Fidelity.
+___ is a network of interconnected LANs within a limited area, e.g. corporate buildings.|Campus Area Network|Metropolitan Area Network|System Area Network|Wide Area Network|0|CAN = several LANs in a campus or group of buildings.
+Term for interconnection of LANs in a city, 5 to 50 km?|Campus Area Network|Local Area Network|Metropolitan Area Network|Wide Area Network|2|MAN = Metropolitan = city sized.
+Who monitors network security, operation and users?|Encoder|End-User|Network Administrator|Network Technician|2|The admin manages and monitors. The technician repairs and installs.
+___ stores user documents with a large amount of memory and storage space.|Application server|File server|Mail server|Print server|1|File server = shared files and documents.
+IP address used by a virtual machine to communicate over the physical network?|Customer address|Internet address|Private address|Provider address|3|Provider Address (PA) is for the physical network. Customer Address (CA) is inside the VM. Wording is shaky, so confirm with your instructor.
+Version that verifies users through a server, with complex setup but more security?|TKIP|WPA2-Enterprise|WPA2-Personal|WPS|1|“Enterprise = Server” (RADIUS). Personal just uses a shared password.
+What class of IP address is 192.168.0.1?|Class A|Class B|Class C|Class D|2|Class C starts at 192-223. A: 1-126, B: 128-191, D: 224+.
+A router designed to operate in the Internet backbone?|Bridge|Core|Edge|Network|1|Core = center/backbone. Edge sits at the border.
+___ allows you to list devices and only allow those on the Wi-Fi network.|MAC Address filtering|Service Set Identifier|Wired equivalent privacy|Wireless security|0|Whitelist by MAC address. SSID is just the network name.
+Network that connects through signals, e.g. infrared?|Campus Area Network|Local Area Network|Wireless Personal Area Network|Wide Area Network|2|Infrared and Bluetooth have short, personal range = WPAN.
+___ lets users move around the coverage area in line of sight while staying connected.|Campus Area Network|Local Area Network|Wide Area Network|Wireless Local Area Network|3|WLAN = wireless LAN.
+___ is an enterprise-level backup and recovery suite.|NetBackup|NetCopy|NetFile|NetSave|0|Veritas NetBackup. The name says it.
+Server allowing central administration of network users and network?|Application Server|Database Server|Directory Server|File Server|2|Directory server = Active Directory, which manages users centrally.
+___ is an information asset suffering damage, unintended modification or disclosure.|Attack|Exploit|Exposure|Loss|3|Loss is the actual damage. An attack or exploit is the action.
+Security standard that makes router-to-wireless connections faster and easier?|TKIP|WPS|WPA2-Enterprise|WPA2-Personal|1|Wi-Fi Protected Setup = the push-button quick connect.
+Most efficient in transferring larger files?|Control Protocol|File Transfer Protocol|Hypertext Transfer Protocol|Network Time protocol|1|FTP is built for file transfers. HTTP is for web pages and NTP is for time.
+Technique to gain unauthorized access where the intruder sends messages with a source IP...|Sniffers|Spam|Spoofing|Spyware|2|Spoofing = faking the source identity. Sniffers only listen.
+Lets admins define the types of files that can be saved in a Windows volume or folder.|File Classification Infrastructure|File Compression|File Encryption|File Screening|3|File Screening (FSRM) blocks types like .mp3 or .exe.
+Clustering technology that distributes client requests across several servers with replicated configurations?|Cluster quorum|Hyper-V virtualization|Network load balancing|Quick migration|2|NLB spreads client requests among servers.
+Log files that conserve disk space by not growing past a limit?|Circular Logging|Counter Logs|Linear Logging|View Log File Data|0|It “circles” back and overwrites old data. Linear keeps growing.
+A ___ should be upgraded to send and receive strong signals to and from the other computer.|Video card|Memory card|Network card|Sim card|2|Network card handles the signals.
+Protocol for quick, automatic, central distribution of IP addresses?|DNS|DHCP|SMTP|TCP|1|DHCP = Dynamic Host Configuration (Control) Protocol, hands out IPs automatically. DNS maps names.
+Command-line tool to find the IP address of a host or domain name?|MS DOS|NSLOOKUP|PING|TRACERT|1|NSLOOKUP = Name Server Lookup. PING only tests reachability.
+Time and date keep resetting even after fixing in BIOS. Problem?|CMOS battery failure|CPU overheating|Flash Memory Failure|System Crashing|0|The CMOS battery keeps the clock running. A dead one resets it.
+Tool that checks hard drive condition: Good, Caution or Bad?|Crystal Disk Info|Defragmented|Disk Management|Scandisk|0|Crystal Disk Info reads S.M.A.R.T. health status.
+A task to do after planning to fix the network is ___|Implementing the agreement|Implementing the idea|Implementing the result|Implementing the solution|3|Troubleshooting order: identify, theorize, test, plan, IMPLEMENT, verify, document.
+10-Mbit Ethernet with broadband coax carrying multiple baseband channels, max 3600 meters?|10Base-T|10Base-2|10Base-5|10Base-36|3|The “36” means 3600 m. 10Base-2 is 185 m and 10Base-5 is 500 m.
+Network security system that monitors and controls traffic based on predetermined rules?|Firewall|Gateway|Group policy|Media Access Control (MAC)|0|Firewall = rule-based traffic filter.
+Term when a system is unavailable?|Downtime|Recovery|Reliability|Unavailability|0|Downtime is the standard term.
+Command used to certify peer name resolution in Active Directory?|DCPROMO|DNSCMD|FORMAT|NSLOOKUP|3|NSLOOKUP tests name resolution. DNSCMD is the runner-up, so confirm with your instructor.
+Active Directory protocol used to access data from a database?|DHCP|FTP|SMTP|LDAP|3|Lightweight Directory Access Protocol queries directories.
+Which displays measures and real-time statistics of system performance?|Counter Logs|Counter Monitoring|View Current Activity|View Log File Data|2|Real-time view. Logs are saved records. Wording is shaky, so confirm.
+Peripheral card that has a media access control address?|Firmware card|Network Interface Card|Peripheral Component Interconnect Card|Tuner Card|1|The NIC carries the MAC address.
+Term for the main patch panel linking every telecom room inside a building?|Lead extension|Major distribution line|Multiplexer|Vertical cross-connect|3|Vertical cross-connect links floors and rooms. “Major distribution line” is the alternate, so confirm.
+Enclosed or semi-enclosed channel that protects, routes and hides cables?|Holder|Rack|Panel|Raceway|3|A race track for wires.
+___ is a serial bus interface for high-speed communications, also IEEE 1394.|Firewire|USB|SATA|Thunderbolt|0|IEEE 1394 = Firewire.
+Microchip managing data communication between a CPU and a motherboard?|Inclusive Controller Hub|Input/Output Controller Hub|Internal Controller Hub|Intersystem Controller Hub|1|ICH = I/O Controller Hub.
+UEFI/BIOS option for security tasks such as locating the device?|LoJack|Remote PC ON|Tracker on|Wake on LAN|0|“Low-Jack” tracks a stolen laptop.
+Text-based command for creating a bootable flash drive?|Boot|Chkdsk|Diskpart|Format|2|Diskpart = Disk + Partition tool. Chkdsk only checks errors.
+Minimum RAM requirement of Server 2008 R2?|512MB|1GB|2GB|4GB|0|Minimum is 512MB (recommended is 2GB).
+In Windows 7, the indicator that a video driver has not been installed?|Displays BIOS setup only|NO video display|Only standard video is displayed|Three short beeps|2|Windows falls back to the basic VGA driver, so you get low-res standard video.
+Voltmeter reading of a shorted diode?|Almost zero volt|Equal to its source voltage|Half of the source voltage|Zero volt|3|Shorted means no voltage drop at all. “Almost zero” is a good diode.
+___ is the process of joining two cable ends together.|Cable conduiting|Cable passing|Cable pressing|Cable splicing|3|Splice = join.
+Hardware device that connects serial devices across a network?|Com Port|Coaxial Cable|Register Jack|Terminal Server|3|A terminal server puts serial devices on the network.
+What class of IP addressing is 10.10.10.1?|Class A|Class B|Class C|Class D|0|Class A is 1-126 (10.x.x.x is the private Class A range). Mnemonic: All Big Cats Drink.`
+.split("\n").map(l=>{const p=l.split("|");return{q:p[0],o:p.slice(1,5),a:+p[5],e:p[6]}});
+Q.forEach((x,i)=>x.n=i+1);
+const P=[["Case (chassis)","Houses and protects all parts. Check the form factor (ATX, mATX) matches the motherboard."],["Power Supply Unit (PSU)","Converts AC to DC. Connectors: 24-pin main, 4/8-pin CPU, SATA, Molex, PCIe. Rails: Red +5V, Yellow +12V, Orange +3.3V."],["Motherboard","Main board connecting everything. Has CPU socket, RAM slots, PCIe slots, SATA ports, CMOS battery, chipset (ICH)."],["CPU (processor)","The brain. Align the gold triangle with the socket marking. Never force it."],["Heatsink and fan","Cools the CPU. Apply thermal paste (pea-sized) before mounting. Plug in the CPU_FAN header."],["RAM","Temporary working memory. Notch aligns with the slot key. Push until both clips click."],["HDD / SSD","Permanent storage. HDD is a spinning disk. SSD is flash. Uses SATA data + SATA power cables."],["Optical drive","Reads CDs/DVDs. SATA data + power."],["Video card (GPU)","Handles graphics. Goes in the PCIe x16 slot. May need extra PCIe power."],["NIC (network card)","Network connection and has the MAC address. Goes in a PCIe/PCI slot or is onboard."],["CMOS battery","CR2032 coin cell. Keeps BIOS settings and clock. A dead one resets date and time."],["BIOS/UEFI chip","Firmware that starts the hardware (POST) and boots the OS."],["Front panel connectors","Power SW, Reset SW, HDD LED, Power LED, speaker, USB and audio headers. Check the motherboard manual for pin layout."]];
+const PP=`Case (chassis)|The case is the enclosure that holds, protects and organizes all the internal parts.|Form factors: ATX, Micro-ATX, Mini-ITX (must match the motherboard);Provides airflow (case fans) and grounding;Has drive bays, expansion slot covers and the front panel;Keeps out dust and shields against EMI
+Power Supply Unit (PSU)|The PSU converts AC power from the wall into the low-voltage DC power that the parts need.|24-pin main to motherboard;4/8-pin CPU power;SATA power for drives, Molex for old devices, 6/8-pin PCIe for the video card;Rails: Red +5V, Yellow +12V, Orange +3.3V, Black ground;Rated in watts, has its own fan
+Motherboard|The motherboard is the main circuit board that connects all components and lets them communicate.|Has CPU socket, RAM slots, PCIe slots, SATA ports, chipset;Holds the BIOS/UEFI chip and CMOS battery;Has the front panel and USB headers;Form factor must match the case
+Chipset (Northbridge / Southbridge)|The chipset is a set of chips on the motherboard that manages data flow between the CPU, memory, and other devices.|Northbridge: connects the CPU to RAM and the video card (fast devices);Southbridge: handles slower I/O such as SATA, USB, audio, PCI slots, BIOS and NIC;Southbridge is also called ICH (I/O Controller Hub) or PCH;Modern boards: the northbridge is built into the CPU, so only one chip is left (the PCH), and it is still called the chipset;Mnemonic: North = Near the CPU (fast), South = Slow devices
+CPU (processor)|The CPU is the brain of the computer. It executes instructions and does the calculations.|Speed is measured in GHz, plus number of cores;Intel uses LGA sockets, AMD uses AM4/AM5;Align the gold triangle with the socket marking;Never force it in;Produces heat, so it needs a heatsink and fan
+Reading CPU names (Intel / AMD)|A CPU name tells you its tier, generation, performance level and special features through its suffix.|Intel i7-12700KF: i7 = tier (i3 < i5 < i7 < i9), 12 = generation, 700 = performance level, KF = suffix;4-digit names: first digit is the generation (i7-3770 = 3rd gen);Intel suffixes: K = unlocked for overclocking, F = NO integrated graphics (needs a video card), KF = both, H/HX = high performance laptop, U = low power laptop, T/S = low power desktop;No F = has integrated graphics, so it works without a GPU;AMD Ryzen 5 3550H: 5 = tier, 3 = series (3000), 550 = performance level, H = high performance laptop;AMD suffixes: X = higher clock, G = has integrated graphics, U = low power laptop, X3D = extra 3D V-Cache for gaming
+Heatsink and fan|The heatsink and fan remove heat from the CPU to prevent overheating.|Thermal paste fills tiny gaps for better heat transfer (pea-sized);Heatsink absorbs the heat, fan blows it away;Plug the fan into the CPU_FAN header;Overheating causes slowdown or shutdown
+RAM|RAM is the temporary, fast memory that holds the data and programs currently in use.|Volatile: data is lost when power is off;Types DDR3, DDR4, DDR5 are not interchangeable (notch position differs);DIMM for desktop, SODIMM for laptop;Install in matching slots for dual channel;Push until both clips click
+HDD (hard disk drive)|The HDD is permanent storage that uses spinning magnetic platters.|Parts: platters, read/write head, spindle motor;Common speeds 5400 and 7200 RPM;Cheaper and bigger than SSD, but slower and fragile;Uses SATA data and SATA power cables
+SSD (solid state drive)|The SSD is permanent storage that uses flash memory with no moving parts, so it is faster.|Forms: 2.5 inch SATA and M.2;NVMe M.2 is faster than SATA;No defrag needed, shock resistant, quiet
+Optical drive|The optical drive reads and writes CDs, DVDs and Blu-ray discs using a laser.|Capacity: CD about 700 MB, DVD 4.7 GB, Blu-ray 25 GB;Uses SATA data and power;Mostly replaced by USB drives
+Video card (GPU)|The video card processes graphics and sends the video output to the monitor.|Goes in the PCIe x16 slot;Has its own VRAM and cooling;Ports: HDMI, DisplayPort, DVI, VGA;May need extra PCIe power;Integrated graphics use the CPU and RAM instead
+NIC (network interface card)|The NIC connects the computer to a network and carries the MAC address.|RJ45 port for wired, antenna for wireless;2 LEDs: link and activity;MAC address is a unique 48-bit hardware address;PCIe card or onboard
+CMOS battery|The CMOS battery powers the CMOS memory so BIOS settings and the clock are kept when the PC is off.|CR2032, 3V coin cell;Dead battery: date and time reset, CMOS checksum error;Replace with the same type, + side up
+BIOS / UEFI|BIOS is the firmware that tests the hardware at startup (POST) and loads the operating system.|Stored on a chip on the motherboard;Beep codes report POST errors;Settings: boot order, date and time, security;UEFI is the newer one: mouse support, GPT disks, Secure Boot
+Cables and connectors|Cables carry power and data between the parts.|SATA data cable: 7-pin, L-shaped so it fits one way;24-pin ATX, 4/8-pin CPU, SATA power, Molex, PCIe power;Connectors are keyed, so never force them
+Front panel connectors|Front panel connectors link the case buttons, LEDs and ports to the motherboard.|Power SW, Reset SW, Power LED, HDD LED, speaker;Switches have no polarity, LEDs do (+ and -);USB 3.0 header is 19-pin, USB 2.0 is 9-pin;Follow the motherboard manual for the pin layout`.split("\n").map(l=>l.split("|"));
+document.getElementById("plist").innerHTML=`<div class="card"><b>🎤 Oral answer formula</b><br>Name → what it does (one sentence) → one key fact. Example: “The PSU converts AC to DC power. It has a 24-pin main connector to the motherboard.”</div>`+PP.map(p=>`<details><summary>${p[0]}</summary><p><span class="tag">Say this</span> <b>${p[1]}</b></p><p><span class="tag">Key points</span></p><ul>${p[2].split(";").map(k=>`<li>${k}</li>`).join("")}</ul></details>`).join("");
+(function(){
+const W=document.querySelector('.wrap');
+const st=document.createElement('style');
+st.textContent='svg.dg{width:100%;height:auto;background:var(--bg);border:2px solid var(--bd);border-radius:12px;margin:6px 0}svg.dg text{font:9px system-ui,sans-serif;fill:#3b2f00;text-anchor:middle}svg.dg .pc{fill:#f5c400;stroke:#3b2f00}svg.dg .mb{fill:#fff;stroke:#3b2f00}svg.dg .pp{fill:#d9a400;stroke:#3b2f00}svg.dg .sw{fill:#ffe98a;stroke:#3b2f00}svg.dg line{stroke:var(--ink);stroke-width:1.5}svg.dg .bb{stroke-width:4}svg.dg .rg{stroke-dasharray:4 2;stroke:#b3261e}.lg{font-size:13px;opacity:.85}';
+document.head.appendChild(st);
+const O=[['7','Application','Gives the user access to network services. It is the layer closest to the user.','HTTP, FTP, SMTP, DNS, DHCP','Data'],['6','Presentation','Translates, encrypts and compresses data so the receiver can read it.','JPEG, MP3, ASCII, SSL/TLS','Data'],['5','Session','Opens, manages and closes the connection (session) between two devices.','NetBIOS, RPC, sockets','Data'],['4','Transport','Delivers data end to end. Breaks data into segments, handles error recovery and flow control.','TCP (reliable), UDP (fast, no guarantee), port numbers','Segment'],['3','Network','Handles logical addressing (IP) and finds the best path (routing).','IP, ICMP, Router','Packet'],['2','Data Link','Handles physical addressing (MAC), framing and error detection on the local network.','Ethernet, MAC address, Switch, Bridge, NIC','Frame'],['1','Physical','Sends raw bits (1s and 0s) over the cable or air.','Cables, RJ45, Hub, Repeater','Bits']];
+const od=document.createElement('div');od.id='osi';od.className='hide';
+od.innerHTML=`<div class='card'><b>Mnemonics</b><br>Top to bottom (7 to 1): <b>A</b>ll <b>P</b>eople <b>S</b>eem <b>T</b>o <b>N</b>eed <b>D</b>ata <b>P</b>rocessing<br>Bottom to top (1 to 7): <b>P</b>lease <b>D</b>o <b>N</b>ot <b>T</b>hrow <b>S</b>ausage <b>P</b>izza <b>A</b>way<br>Data units (7-5 to 1): <b>D</b>o <b>S</b>ome <b>P</b>eople <b>F</b>ear <b>B</b>ugs = Data, Segment, Packet, Frame, Bits</div>`+O.map(o=>`<div class='card'><span class='tag'>Layer ${o[0]}</span> <b>${o[1]}</b> <span class='tag'>${o[4]}</span><br>${o[2]}<br><small>Examples: ${o[3]}</small></div>`).join('')+`<div class='card'><b>Quick device guide</b><br>Layer 1 = Hub, Repeater, cables. Layer 2 = Switch, Bridge, NIC (MAC). Layer 3 = Router (IP).</div>`;
+W.appendChild(od);
+const B=(c,x,y,w,h,t)=>`<rect class='${c}' x='${x}' y='${y}' width='${w}' height='${h}' rx='3'/><text x='${x+w/2}' y='${y+h/2+3}'>${t}</text>`;
+const Ln=(a,b,c,d,k)=>`<line ${k?`class='${k}' `:''}x1='${a}' y1='${b}' x2='${c}' y2='${d}'/>`;
+const SV=s=>`<svg class='dg' viewBox='0 0 360 200'>${s}</svg>`;
+let star='';
+[10,50,90,130].forEach((y,i)=>{star+=Ln(49,y+13,80,y+13)+Ln(116,y+13,150,y+13)+B('pc',5,y,44,26,'PC'+(i+1))+B('mb',80,y,36,26,'MB')});
+star+=B('pp',150,5,40,170,'PP')+Ln(190,88,225,88)+Ln(275,88,300,88)+B('sw',225,70,50,36,'Switch')+B('sw',300,70,50,36,'Router');
+let bus='';
+[15,95,175,255].forEach((x,i)=>{bus+=Ln(x+22,32,x+22,48)+Ln(x+22,68,x+22,82)+Ln(x+22,100,x+22,125)+B('pc',x,8,44,24,'PC'+(i+1))+B('mb',x,48,44,20,'MB')});
+bus+=B('pp',5,82,340,18,'Patch Panel')+Ln(5,125,345,125,'bb')+B('sw',0,115,14,20,'T')+B('sw',346,115,14,20,'T')+Ln(180,125,180,152)+B('sw',150,152,60,26,'Router');
+const rm=d=>{const P=[[20,10],[280,10],[280,150],[20,150]],M=[[100,45],[224,45],[224,115],[100,115]];let r=Ln(80,23,280,23,'rg')+Ln(310,36,310,150,'rg')+Ln(280,163,80,163,'rg')+Ln(50,150,50,36,'rg');if(d)r+=Ln(80,36,280,150,'rg')+Ln(280,36,80,150,'rg');P.forEach((p,i)=>{r+=Ln(p[0]+30,p[1]+13,M[i][0]+18,M[i][1]+10)+Ln(M[i][0]+18,M[i][1]+10,180,107)});P.forEach((p,i)=>{r+=B('pc',p[0],p[1],60,26,'PC'+(i+1))+B('mb',M[i][0],M[i][1],36,20,'MB')});return r+Ln(180,72,180,95)+B('sw',150,50,60,22,'Router')+B('pp',150,95,60,24,'PP')};
+let tr=Ln(180,28,75,48)+Ln(180,28,285,48)+Ln(75,72,75,88)+Ln(285,72,285,88);
+[30,90,250,310].forEach((x,i)=>{tr+=Ln(x+18,104,x+18,118)+Ln(x+18,136,x+18,160)+B('mb',x,118,36,18,'MB')+B('pc',x-2,160,40,24,'PC'+(i+1))});
+tr+=Ln(205,16,260,16)+B('sw',260,4,50,24,'Router')+B('sw',155,4,50,24,'Core SW')+B('sw',50,48,50,24,'Switch')+B('sw',260,48,50,24,'Switch')+B('pp',20,88,320,16,'Patch Panel');
+const T=[['Star','Star topology connects every device to one central switch or hub.',star,'Draw the PCs in a column;Beside each PC draw a modular box (MB) and connect them with a patch cord;Run a cable from each MB to the patch panel (PP);Connect the PP to the central switch with a patch cord;Connect the switch to the router or server','Easy to add devices and troubleshoot. One broken cable affects only one PC.','If the switch fails, the whole network goes down. Needs more cable.','Most common. Uses UTP cable with RJ45.'],['Bus','Bus topology connects all devices to one backbone cable with a terminator on both ends.',SV(bus),'Draw the backbone line along the bottom;Draw a terminator (T) at each end;Draw the patch panel above the backbone;Draw an MB for each PC and connect MB to the PP;Connect each PC to its MB, then connect the PP to the backbone;Connect the router to the backbone','Cheap and uses short cable.','A break in the backbone stops everyone. Hard to troubleshoot and slows down with more users.','Coaxial cable (10Base2, 10Base5), BNC connector, terminator.'],['Ring','Ring topology connects each device to two neighbors in a closed loop. Data travels in one direction.',SV(rm(false)),'Draw the PCs in a square or circle;Connect each PC to the next one to make a closed loop (dashed red);Draw the patch panel in the center;Beside each PC draw an MB and connect it to the PP;Connect the router to the PP (center)','Orderly data flow with no collisions.','One break can stop the whole ring (single ring). Hard to add devices.','Uses token passing. Token Ring and FDDI.'],['Mesh','Mesh topology connects every device to every other device.',SV(rm(true)),'Draw the PCs at the corners;Connect every PC to every other PC (including the diagonals);Draw the patch panel in the center;Draw an MB for each PC and connect it to the PP;Connect the router to the PP (center)','Very reliable because there are many alternate paths.','Expensive and complex because of the many cables and ports.','Links needed = n(n-1)/2. Example: 4 PCs = 6 links. Full mesh vs partial mesh.'],['Tree','Tree topology is a hierarchy of star networks connected to a root (core) switch.',SV(tr),'Draw the core switch on top;Connect it to the branch switches below it;Draw the patch panel under the branch switches;Draw an MB for each PC and connect it to the PP;Place the PCs at the bottom;Connect the router to the core switch','Scalable and easy to expand. Easy to manage by group.','If the core switch fails, the branches are isolated.','Also called hierarchical. Good for big buildings.'],['Hybrid','Hybrid topology is a combination of two or more different topologies.','','Combine the drawings above (for example star + bus);Always keep the PC, MB, PP chain','Flexible and scalable.','Complex and costly to design and manage.','Example: star-bus.']];
+const td=document.createElement('div');td.id='topo';td.className='hide';
+td.innerHTML=`<div class='card'><b>Always include in the diagram</b><br>Chain: <b>PC → MB → PP → Switch</b><ul><li>PC to MB (modular box / wall jack): patch cord</li><li>MB to PP (patch panel): horizontal UTP cable</li><li>PP to Switch: patch cord</li><li>Router: connects the LAN to the internet (ISP). Connect it to the switch (or PP) with a patch cord</li></ul><span class='lg'>PC = computer, MB = modular box, PP = patch panel</span></div>`+T.map((t,k)=>`<details${k==0?' open':''}><summary>${t[0]}</summary><p><span class='tag'>Say this</span> <b>${t[1]}</b></p>${t[2]}<p><span class='tag'>How to draw</span></p><ol>${t[3].split(';').map(x=>`<li>${x}</li>`).join('')}</ol><p><span class='tag'>Pros</span> ${t[4]}</p><p><span class='tag'>Cons</span> ${t[5]}</p><p><span class='tag'>Note</span> ${t[6]}</p></details>`).join('');
+W.appendChild(td);
+})();
+let L,i,s,miss,done;
+const $=id=>document.getElementById(id);
+function tab(n){["quiz","parts","osi","topo"].forEach((d,k)=>{$(d).classList.toggle("hide",n!=k+1);$("t"+(k+1)).classList.toggle("on",n==k+1)})}
+function go(sh){L=Q.slice();if(sh)L.sort(()=>Math.random()-.5);i=0;s=0;miss=[];$("start").classList.add("hide");$("end").classList.add("hide");$("play").classList.remove("hide");show()}
+function show(){const x=L[i];done=false;$("pos").textContent=`Question ${i+1} of ${L.length} (paper #${x.n})`;$("sc").textContent=`Score: ${s}`;$("pb").style.width=(i/L.length*100)+"%";$("qt").textContent=x.q;$("fb").innerHTML="";$("nx").classList.add("hide");
+$("ops").innerHTML="";x.o.forEach((t,k)=>{const b=document.createElement("button");b.className="opt";b.textContent="abcd"[k]+". "+t;b.onclick=()=>pick(k);$("ops").appendChild(b)})}
+function pick(k){if(done)return;done=true;const x=L[i],bs=$("ops").children,r=k==x.a;
+bs[x.a].classList.add("ok");if(!r)bs[k].classList.add("no");
+if(r)s++;else miss.push(x);
+$("fb").innerHTML=`<div class="fb ${r?"ok":"no"}"><b>${r?"✅ Correct!":"❌ Not quite."}</b> ${r?"":`You picked <b>${"abcd"[k]}. ${x.o[k]}</b>, but the answer is <b>${"abcd"[x.a]}. ${x.o[x.a]}</b>.`}<br>${x.e}</div>`;
+$("sc").textContent=`Score: ${s}`;$("nx").textContent=i==L.length-1?"See results ➜":"Next ➜";$("nx").classList.remove("hide")}
+function next(){i++;if(i>=L.length)return fin();show()}
+function fin(){$("play").classList.add("hide");const e=$("end");e.classList.remove("hide");const pc=Math.round(s/L.length*100);
+e.innerHTML=`<h2>${s} / ${L.length} (${pc}%)</h2><p>${pc>=85?"Galing! 🌟":pc>=60?"Kaya mo yan, konting review pa! 💛":"Okay lang yan, ulitin natin 💪"}</p><div class="row"><button class="btn" onclick="go(false)">Retry all</button><button class="btn alt" onclick="redo()" ${miss.length?"":"disabled"}>Retry missed (${miss.length})</button></div>`+(miss.length?"<h3>Missed</h3>"+miss.map(x=>`<div class="miss"><span class="tag">#${x.n}</span> ${x.q}<br><b>${x.o[x.a]}</b>. ${x.e}</div>`).join(""):"")}
+function redo(){L=miss.slice();i=0;s=0;miss=[];$("end").classList.add("hide");$("play").classList.remove("hide");show()}
+</script></body></html>
